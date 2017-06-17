@@ -10,16 +10,22 @@ import Foundation
 import UIKit
 import Charts
 
-class HistoryViewController: UIViewController {
+class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    // chart
     var barChartView: BarChartView!
-
     // chartの高さ
     var ch: CGFloat = 200
+
+    // 履歴データ
+    var tableView: UITableView!
     
-    
+    let unitsCal = [1200.0,1600.0,2200.0,1000.0,1800.0,1100.0,1500.0]
+    let uptime  = ["06/17 08:12","06/16 08:35","06/16 12:27","06/16 15:24","06/16 18:49"]
+    let foodcal = [400.0,350.0,450.0,550.0,360.0]
+   
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,9 +34,10 @@ class HistoryViewController: UIViewController {
         let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
         // ナビゲーションバーの高さを取得
         //let navBarHeight = self.navigationController?.navigationBar.frame.size.height
-    
-        let unitsCal = [1200.0,1600.0,2200.0,1000.0,1800.0,1100.0,1500.0]
+        
+        self.view.backgroundColor = UIColor.white
 
+        // チャート
         barChartView = BarChartView(frame:CGRect(x:0,y:statusBarHeight,width:self.view.bounds.width,height:ch))
         barChartView.leftAxis.axisMinimum = 0.0
         barChartView.leftAxis.axisMaximum = unitsCal.max()! * 1.25
@@ -58,8 +65,15 @@ class HistoryViewController: UIViewController {
         barChartView.drawBordersEnabled = true
         
         setChart(values: unitsCal)
-        self.view.backgroundColor = UIColor.white
         self.view.addSubview(barChartView)
+        
+        
+        let mt:CGFloat = statusBarHeight + ch
+        tableView = UITableView(frame:CGRect(x:0,y:mt,width:self.view.bounds.width,height:self.view.bounds.height - mt))
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.view.addSubview(tableView)
         
     }
     
@@ -112,6 +126,28 @@ class HistoryViewController: UIViewController {
         
     }
     
+    // セルを作る
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
+        //cell.imageView = ""
+        cell.accessoryType = .detailButton
+        cell.textLabel?.text = "\(foodcal[indexPath.row]) kcal"
+        cell.detailTextLabel?.text = "\(uptime[indexPath.row])"
+        
+        return cell
+    }
+    // セルの数を設定
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    // セルがタップされた時の処理
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("タップされたセルのindex番号: \(indexPath.row)")
+    }
+    // セルの高さを設定
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
     
 }
 
