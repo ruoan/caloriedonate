@@ -130,9 +130,9 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         //cell.imageView = ""
-        cell.accessoryType = .detailButton
         cell.textLabel?.text = "\(foodcal[indexPath.row]) kcal"
         cell.detailTextLabel?.text = "\(uptime[indexPath.row])"
+        //cell.accessoryType = .detailButton
         
         return cell
     }
