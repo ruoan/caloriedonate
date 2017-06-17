@@ -15,7 +15,25 @@ class PieView: UIView {
     
     var _max: CGFloat!
     
-    var _end_angle:CGFloat!
+    var _end_angle:CGFloat = -CGFloat(M_PI/2)
+    
+    func update(link:AnyObject){
+        var angle = CGFloat(M_PI*2.0 / 100.0);
+        _end_angle = _end_angle +  angle
+        print(_end_angle)
+        if(_end_angle > CGFloat(M_PI*2)) {
+            //終了
+            link.invalidate()
+        } else {
+            self.setNeedsDisplay()
+        }
+        
+    }
+    
+    func startAnimating(){
+        let displayLink = CADisplayLink(target: self, selector: #selector(self.update))
+        displayLink.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+    }
     
     
     init(frame: CGRect,cal: CGFloat, max:CGFloat) {
@@ -55,7 +73,6 @@ class PieView: UIView {
         if(_max > _calorie){
             color = underColor;
             bcolor = baseColor;
-            print((_calorie / _max));
             end_angle = start_angle + CGFloat(M_PI*2) * (_calorie / _max);
         } else {
             color = overColor;
@@ -63,8 +80,9 @@ class PieView: UIView {
             end_angle = start_angle + CGFloat(M_PI*2) * ((_calorie - _max) / _max);
         }
         
-        context.setStrokeColor(lineColor)
-        
+        if(end_angle > _end_angle) {
+            end_angle = _end_angle;
+        }
         
         context.setLineWidth(10.0);
         //context.move(to: CGPoint(x: x, y: y));
@@ -85,6 +103,12 @@ class PieView: UIView {
                       clockwise: false);
         context.setStrokeColor(bcolor.cgColor);
         
+        context.strokePath();
+        
+        context.setLineWidth(2.0)
+        context.setStrokeColor(lineColor.cgColor)
+        context.move(to: CGPoint(x: 200, y: 80))
+        context.addLine(to: CGPoint(x: 55, y: 175))
         context.strokePath();
         
         context.setShadow(offset: CGSize(width: 1.0, height: 1.0), blur: CGFloat(6.0));

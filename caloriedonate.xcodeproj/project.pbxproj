@@ -11,6 +11,7 @@
 		51775AD64461E76F1F719B2E /* Pods_caloriedonate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1BE5D3A0B253D31C58CB88B /* Pods_caloriedonate.framework */; };
 		7B0777261EF506C9002E7BBD /* PieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0777251EF506C9002E7BBD /* PieView.swift */; };
 		7B0777281EF52333002E7BBD /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0777271EF52333002E7BBD /* UIColorExtension.swift */; };
+		7B07772A1EF535AC002E7BBD /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0777291EF535AC002E7BBD /* CircleView.swift */; };
 		948DA4585712EA55BD7CBF32 /* Pods_caloriedonateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41767B8885826F254DF4AA73 /* Pods_caloriedonateTests.framework */; };
 		C0C8B9AC1EF4F958002B451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B9AB1EF4F958002B451E /* AppDelegate.swift */; };
 		C0C8B9AE1EF4F958002B451E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B9AD1EF4F958002B451E /* ViewController.swift */; };
@@ -42,6 +43,7 @@
 		41767B8885826F254DF4AA73 /* Pods_caloriedonateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_caloriedonateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B0777251EF506C9002E7BBD /* PieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieView.swift; sourceTree = "<group>"; };
 		7B0777271EF52333002E7BBD /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		7B0777291EF535AC002E7BBD /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		A36032F4384E6F1EFE29BB4F /* Pods_caloriedonateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_caloriedonateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B9A81EF4F958002B451E /* caloriedonate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = caloriedonate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B9AB1EF4F958002B451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				7B0777251EF506C9002E7BBD /* PieView.swift */,
+				7B0777291EF535AC002E7BBD /* CircleView.swift */,
 			);
 			name = uiview;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B07772A1EF535AC002E7BBD /* CircleView.swift in Sources */,
 				C0C8B9AE1EF4F958002B451E /* ViewController.swift in Sources */,
 				C0C8B9AC1EF4F958002B451E /* AppDelegate.swift in Sources */,
 				7B0777261EF506C9002E7BBD /* PieView.swift in Sources */,
