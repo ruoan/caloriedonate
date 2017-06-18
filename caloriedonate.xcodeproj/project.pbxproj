@@ -15,6 +15,7 @@
 		7B07772E1EF56262002E7BBD /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B07772D1EF56262002E7BBD /* HistoryViewController.swift */; };
 		7B0777301EF565FF002E7BBD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B07772F1EF565FF002E7BBD /* Default-568h@2x.png */; };
 		7B93EF0D1EF606350072CF51 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B93EF0C1EF606350072CF51 /* Media.xcassets */; };
+		7B93EF0F1EF608380072CF51 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B93EF0E1EF608380072CF51 /* AsyncImageView.swift */; };
 		948DA4585712EA55BD7CBF32 /* Pods_caloriedonateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41767B8885826F254DF4AA73 /* Pods_caloriedonateTests.framework */; };
 		C0C8B9AC1EF4F958002B451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B9AB1EF4F958002B451E /* AppDelegate.swift */; };
 		C0C8B9AE1EF4F958002B451E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B9AD1EF4F958002B451E /* ViewController.swift */; };
@@ -50,6 +51,7 @@
 		7B07772D1EF56262002E7BBD /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		7B07772F1EF565FF002E7BBD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		7B93EF0C1EF606350072CF51 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		7B93EF0E1EF608380072CF51 /* AsyncImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
 		A36032F4384E6F1EFE29BB4F /* Pods_caloriedonateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_caloriedonateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B9A81EF4F958002B451E /* caloriedonate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = caloriedonate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B9AB1EF4F958002B451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				7B93EF0C1EF606350072CF51 /* Media.xcassets */,
 				FA432E671EF60D6400F5CE26 /* UIImage.swift */,
 				FA432E691EF60D7F00F5CE26 /* PHAsset.swift */,
+				7B93EF0E1EF608380072CF51 /* AsyncImageView.swift */,
 			);
 			path = caloriedonate;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				7B0777261EF506C9002E7BBD /* PieView.swift in Sources */,
 				7B0777281EF52333002E7BBD /* UIColorExtension.swift in Sources */,
 				FA432E681EF60D6400F5CE26 /* UIImage.swift in Sources */,
+				7B93EF0F1EF608380072CF51 /* AsyncImageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
