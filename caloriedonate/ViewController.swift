@@ -38,7 +38,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         super.viewDidLoad()
         
         //データ取得
-        self.getJson()
+        self.getJson(reload: false)
         
         //画面中央
         let posX: CGFloat = self.view.bounds.width/2
@@ -150,13 +150,23 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         setupImageView()
     }
     
-    func getJson() -> JSON{
+    func getJson(reload: Bool) -> JSON{
+        
+        if(reload){
+            var subviews = self.view.subviews
+            for subview in subviews {
+                subview.removeFromSuperview()
+            }
+            self.today.removeAll()
+            self.nowCal = 0
+        }
+        
         var json:JSON = JSON("")
         let URL = "https://74sgw22ebg.execute-api.ap-northeast-1.amazonaws.com/dev/calorie"
-        Alamofire.request(URL, parameters: ["date":"2017-06-17"])
+        Alamofire.request(URL, parameters: ["date":"2017-06-18"])
             .responseJSON { response in
                 json = JSON(response.result.value)
-                
+
                 
                 json["body"].forEach{(_, data) in
                     
@@ -552,6 +562,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                 DispatchQueue.main.async() {
                     self.myActivityIndicator.stopAnimating()
                     self.displayAlertMessage(message: "\(menu) は \(calorie) kcal でした。")
+                    self.getJson(reload: true)
                 }
                 
         }
