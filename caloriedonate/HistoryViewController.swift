@@ -109,7 +109,7 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func getJson() -> JSON{
         var json:JSON = JSON("")
         let URL = "https://74sgw22ebg.execute-api.ap-northeast-1.amazonaws.com/dev/calorie"
-        Alamofire.request(URL, parameters: ["date":"2017-06-17"])
+        Alamofire.request(URL, parameters: ["start":"2017-06-16","end":"2017-06-18"])
             .responseJSON { response in
                 json = JSON(response.result.value)
                 
@@ -206,7 +206,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     }
     // セルの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        if(rireki != nil){
+            return rireki.count
+        }else {
+            return 0
+        }
     }
     // セルがタップされた時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
