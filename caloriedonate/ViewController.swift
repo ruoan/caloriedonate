@@ -497,15 +497,16 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     func setUpActivityIndicator()
     {
         //Create Activity Indicator
-        myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
-        
+
+        //myActivityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.greyLarge)
+        myActivityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
         // Position Activity Indicator in the center of the main view
         myActivityIndicator.center = view.center
         
         // If needed, you can prevent Acivity Indicator from hiding when stopAnimating() is called
         myActivityIndicator.hidesWhenStopped = true
         
-        myActivityIndicator.backgroundColor = UIColor.white
+        myActivityIndicator.backgroundColor = UIColor.darkGray
         
         view.addSubview(myActivityIndicator)
     }
