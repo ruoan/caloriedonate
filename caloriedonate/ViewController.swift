@@ -70,12 +70,18 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             nowcolor = underColor
         }
         
+        let pierect = 230
+        let pieleft = Int(self.view.bounds.width) / 2 - pierect/2
+        //パイチャート描画
+        self.pieView = PieView(frame: CGRect(x: pieleft, y: 90, width: pierect, height: pierect), cal: self.nowCal!, max: self.baseCal!)
+        self.view.addSubview(self.pieView)
+        
         
         //サークル
         let lstart:CGFloat = -CGFloat(M_PI/2) + CGFloat(M_PI*2) * 0.23;
         let lend:CGFloat = -CGFloat(M_PI/2) + CGFloat(M_PI*2) * 0.57;
         
-        leftCircle = CircleView(frame: CGRect(x: 20, y: 40, width: 140, height: 140),
+        leftCircle = CircleView(frame: CGRect(x: (pieleft-25), y: 40, width: 140, height: 140),
                                 start:lstart,end:lend,width: CGFloat(5.0),color: leftColor, clockwise: true)
         self.view.addSubview(leftCircle)
         
@@ -87,7 +93,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             leftstr = String(nowCal! - baseCal!) + "円"
         }
         
-        let labelleft: UILabel = UILabel(frame: CGRect(x: 30,
+        let labelleft: UILabel = UILabel(frame: CGRect(x: (pieleft - 15),
                                                        y: 80,
                                                        width: 120,
                                                        height: 30))
@@ -181,10 +187,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                     
                 }
                 
-                
-                //パイチャート描画
-                self.pieView = PieView(frame: CGRect(x: 45, y: 90, width: 230, height: 230), cal: self.nowCal!, max: self.baseCal!)
-                self.view.addSubview(self.pieView)
                 
                 self.afterGetjson()
                 
@@ -566,7 +568,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                     self.displayAlertMessage(message: "\(menu) は \(calorie) kcal でした。")
                     self.getJson(reload: true)
                 }
-                self.getJson()
                 
         }
         return true
