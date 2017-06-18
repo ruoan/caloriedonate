@@ -21,12 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splash" highlightedImage="splash" translatesAutoresizingMaskIntoConstraints="NO" id="YU6-2F-BQd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="splash" highlightedImage="splash" translatesAutoresizingMaskIntoConstraints="NO" id="YU6-2F-BQd">
                                 <rect key="frame" x="0.0" y="-10" width="375" height="677"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="YU6-2F-BQd" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Jdj-yk-WFg"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="YU6-2F-BQd" secondAttribute="bottom" id="NJG-JD-1K2"/>
+                            <constraint firstItem="YU6-2F-BQd" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="iDQ-0L-sgu"/>
+                            <constraint firstAttribute="trailing" secondItem="YU6-2F-BQd" secondAttribute="trailing" id="k7m-Wn-Oo7"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
