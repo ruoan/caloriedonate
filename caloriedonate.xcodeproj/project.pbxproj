@@ -14,8 +14,7 @@
 		7B07772A1EF535AC002E7BBD /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0777291EF535AC002E7BBD /* CircleView.swift */; };
 		7B07772E1EF56262002E7BBD /* HistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B07772D1EF56262002E7BBD /* HistoryViewController.swift */; };
 		7B0777301EF565FF002E7BBD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B07772F1EF565FF002E7BBD /* Default-568h@2x.png */; };
-		7B0777321EF57B05002E7BBD /* listing-option.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0777311EF57B05002E7BBD /* listing-option.png */; };
-		7B0777341EF57B33002E7BBD /* photo-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B0777331EF57B33002E7BBD /* photo-camera.png */; };
+		7B93EF0D1EF606350072CF51 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B93EF0C1EF606350072CF51 /* Media.xcassets */; };
 		948DA4585712EA55BD7CBF32 /* Pods_caloriedonateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41767B8885826F254DF4AA73 /* Pods_caloriedonateTests.framework */; };
 		C0C8B9AC1EF4F958002B451E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B9AB1EF4F958002B451E /* AppDelegate.swift */; };
 		C0C8B9AE1EF4F958002B451E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C8B9AD1EF4F958002B451E /* ViewController.swift */; };
@@ -48,8 +47,7 @@
 		7B0777291EF535AC002E7BBD /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		7B07772D1EF56262002E7BBD /* HistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryViewController.swift; sourceTree = "<group>"; };
 		7B07772F1EF565FF002E7BBD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		7B0777311EF57B05002E7BBD /* listing-option.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "listing-option.png"; path = "../../Downloads/listing-option.png"; sourceTree = "<group>"; };
-		7B0777331EF57B33002E7BBD /* photo-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "photo-camera.png"; path = "../../Downloads/photo-camera.png"; sourceTree = "<group>"; };
+		7B93EF0C1EF606350072CF51 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		A36032F4384E6F1EFE29BB4F /* Pods_caloriedonateUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_caloriedonateUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B9A81EF4F958002B451E /* caloriedonate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = caloriedonate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0C8B9AB1EF4F958002B451E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,8 +132,6 @@
 		C0C8B99F1EF4F957002B451E = {
 			isa = PBXGroup;
 			children = (
-				7B0777331EF57B33002E7BBD /* photo-camera.png */,
-				7B0777311EF57B05002E7BBD /* listing-option.png */,
 				7B07772F1EF565FF002E7BBD /* Default-568h@2x.png */,
 				C0C8B9AA1EF4F958002B451E /* caloriedonate */,
 				C0C8B9BF1EF4F958002B451E /* caloriedonateTests */,
@@ -166,6 +162,7 @@
 				C0C8B9B41EF4F958002B451E /* LaunchScreen.storyboard */,
 				C0C8B9B71EF4F958002B451E /* Info.plist */,
 				7B0777271EF52333002E7BBD /* UIColorExtension.swift */,
+				7B93EF0C1EF606350072CF51 /* Media.xcassets */,
 			);
 			path = caloriedonate;
 			sourceTree = "<group>";
@@ -306,10 +303,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B93EF0D1EF606350072CF51 /* Media.xcassets in Resources */,
 				C0C8B9B61EF4F958002B451E /* LaunchScreen.storyboard in Resources */,
 				7B0777301EF565FF002E7BBD /* Default-568h@2x.png in Resources */,
-				7B0777321EF57B05002E7BBD /* listing-option.png in Resources */,
-				7B0777341EF57B33002E7BBD /* photo-camera.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,8 +24,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     var today: [[String: String?]] = []
     
-    let iconcamera :UIImage? = UIImage(named:"photo-camera.png")
-    let iconoption :UIImage? = UIImage(named:"listing-option.png")
+    let iconcamera :UIImage? = UIImage(named:"photo-camera")
+    let iconoption :UIImage? = UIImage(named:"listing-option")
     
     var baseCal:Int? = 1800
     var nowCal:Int? = 0
