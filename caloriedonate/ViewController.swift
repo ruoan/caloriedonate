@@ -501,7 +501,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             multipartFormData: { (multipartFormData) in
                 multipartFormData.append("Photo Prediction".data(using: String.Encoding.utf8)!, withName: "sampleId")
                 multipartFormData.append(imagUrl.data(using: String.Encoding.utf8)!, withName: "sampleLocation")
-                multipartFormData.append("YLVBAHY67AP2QMMPXCOEC3PAYM".data(using: String.Encoding.utf8)!, withName: "modelId")
+                multipartFormData.append("MVYDZWN5B2XBUAMIM6AAURFBBY".data(using: String.Encoding.utf8)!, withName: "modelId")
                 
         },
             to: url,
@@ -542,6 +542,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                     self.myActivityIndicator.stopAnimating()
                     self.displayAlertMessage(message: "\(menu) は \(calorie) kcal でした。")
                 }
+                self.getJson()
                 
         }
         return true
