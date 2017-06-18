@@ -22,13 +22,15 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     var btn1: UIButton!
     var btn2: UIButton!
     
-    var today: [[String: String?]] = []
+    var today: [[String: String]] = []
     
     let iconcamera :UIImage? = UIImage(named:"photo-camera")
     let iconoption :UIImage? = UIImage(named:"listing-option")
     
     var baseCal:Int? = 1800
     var nowCal:Int? = 0
+    
+    let CACHE_SEC : TimeInterval = 5 * 60; //5分キャッシュ
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,15 +148,15 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             .responseJSON { response in
                 json = JSON(response.result.value)
                 
-                //print(json["body"])
                 
                 json["body"].forEach{(_, data) in
+                    
                     self.nowCal = self.nowCal! + data["calorie"].intValue
                     
-                    let food: [String: String?] = [
-                        "menu": data["menu_name"].string,
+                    let food: [String: String] = [
+                        "menu": data["menu_name"].stringValue,
                         "cal": data["calorie"].description,
-                        "img": data["url"].string
+                        "img": data["url"].stringValue
                     ]
                     self.today.append(food)
                     
@@ -177,6 +179,8 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         return json
     }
     
+    
+    
     // セルを作る
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
@@ -184,8 +188,13 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         //cell.imageView = ""
         cell.backgroundColor = bgColor
         let t = today[indexPath.row]
-        cell.textLabel?.text = t["cal"]!! + "kcal"
+        cell.textLabel?.text = t["cal"]! + "kcal"
         cell.detailTextLabel?.text = t["menu"]!
+        print(t["img"])
+        let url = NSURL(string: t["img"]!);
+        var imageData = NSData(contentsOf: url as! URL)
+        var img = UIImage(data:imageData as! Data);
+        cell.imageView?.image = img
         //cell.accessoryType = .detailButton
         
         return cell
