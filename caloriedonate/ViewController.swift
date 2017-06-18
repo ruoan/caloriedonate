@@ -524,7 +524,9 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                         let json = JSON(response.result.value)
                         print("YOUR JSON DATA>>  \(json["probabilities"][0]["label"])")
 
-                       self.postCalorie(calorie: json["probabilities"][0]["label"].stringValue, url: imagUrl, menu: "唐揚げ弁当")
+                        
+                        
+                       self.postCalorie(calorie: json["probabilities"][0]["label"].stringValue, url: imagUrl, menu: "スナック菓子")
                         
                     }
                 case .failure(let encodingError):
