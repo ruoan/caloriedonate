@@ -7,10 +7,30 @@ target 'caloriedonate' do
 
   # Pods for caloriedonate
   pod 'Charts'
-  pod 'Alamofire'
+  pod 'Alamofire', '~> 4.5'
   pod 'SwiftyJSON'
   pod 'Alamofire-SwiftyJSON', :git => "https://github.com/SwiftyJSON/Alamofire-SwiftyJSON.git"
-
+ pod 'AWSAutoScaling'
+    pod 'AWSCloudWatch'
+    pod 'AWSCognito'
+    pod 'AWSCognitoIdentityProvider'
+    pod 'AWSDynamoDB'
+    pod 'AWSEC2'
+    pod 'AWSElasticLoadBalancing'
+    pod 'AWSIoT'
+    pod 'AWSKinesis'
+    pod 'AWSLambda'
+    pod 'AWSLex'
+    pod 'AWSMachineLearning'
+    pod 'AWSMobileAnalytics'
+    pod 'AWSPinpoint'
+    pod 'AWSPolly'
+    pod 'AWSRekognition'
+    pod 'AWSS3'
+    pod 'AWSSES'
+    pod 'AWSSimpleDB'
+    pod 'AWSSNS'
+    pod 'AWSSQS'
 
   target 'caloriedonateTests' do
     inherit! :search_paths
