@@ -119,6 +119,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         btn1.layer.shadowOpacity = 0.7
         btn1.layer.shadowRadius = 3.0
         btn1.layer.cornerRadius = 30.0
+        btn1.addTarget(self, action: #selector(self.gotoHistory), for: .touchUpInside)
         
         self.view.addSubview(btn1)
         
@@ -162,7 +163,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
                     
                 }
                 
-                print(self.nowCal)
                 
                 //パイチャート描画
                 self.pieView = PieView(frame: CGRect(x: 45, y: 90, width: 230, height: 230), cal: self.nowCal!, max: self.baseCal!)
@@ -180,6 +180,17 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     }
     
     
+    internal func gotoHistory(sender: UIButton){
+        
+        // 遷移するViewを定義する.
+        let historyViewController: UIViewController = HistoryViewController()
+        
+        // アニメーションを設定する.
+        historyViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        
+        // Viewの移動する.
+        self.present(historyViewController, animated: true, completion: nil)
+    }
     
     // セルを作る
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
