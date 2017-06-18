@@ -91,6 +91,15 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
             leftstr = "Clear"
         } else {
             leftstr = String(nowCal! - baseCal!) + "円"
+            
+            let alertController = UIAlertController(title: leftstr + "の寄付がされます", message: "ふとるは恥だが役に立つ", preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(title: "われはメシアだ", style: .default) {
+                action in NSLog("okボタンが押されました")
+            }
+            alertController.addAction(okAction)            
+            present(alertController, animated: true, completion: nil)
+
         }
         
         let labelleft: UILabel = UILabel(frame: CGRect(x: (pieleft - 15),
@@ -154,6 +163,7 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         
         setUpActivityIndicator()
         setupImageView()
+        
     }
     
     func getJson(reload: Bool) -> JSON{
