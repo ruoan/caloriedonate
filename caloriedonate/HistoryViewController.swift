@@ -10,10 +10,14 @@ import Foundation
 import UIKit
 import Charts
 
+import Alamofire
+import SwiftyJSON
+
 class HistoryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var appDelegate = UIApplication.shared.delegate as! AppDelegate
     
+    var btn1:UIButton!
     // chart
     var barChartView: BarChartView!
     // chartの高さ
@@ -21,6 +25,11 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
 
     // 履歴データ
     var tableView: UITableView!
+    
+    // ステータスバーの高さを取得
+    let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
+    
+    var rireki: [[String: String]] = []
     
     let unitsCal = [1200.0,1600.0,2200.0,1000.0,1800.0,1100.0,1500.0]
     let uptime  = ["06/17 08:12","06/16 08:35","06/16 12:27","06/16 15:24","06/16 18:49"]
@@ -30,15 +39,31 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        // ステータスバーの高さを取得
-        let statusBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height
         // ナビゲーションバーの高さを取得
         //let navBarHeight = self.navigationController?.navigationBar.frame.size.height
+        let bgColor:UIColor = UIColor.rgb(r: 245, g: 245, b: 245, alpha: 1.0);
+        let btnColor:UIColor = UIColor.rgb(r: 19, g: 144, b: 255, alpha: 1.0);
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = bgColor
+        
+        //戻るボタン
+        btn1 = UIButton()
+        btn1.frame = CGRect(x: 0,
+                            y: statusBarHeight + 5,
+                            width: 80,
+                            height: 15)
+        
+        btn1.titleLabel?.font = UIFont(name: "HiraKakuProN-W6",size: 14)
+        btn1.setTitle("戻る", for: .normal)
+        btn1.setTitleColor(btnColor, for: UIControlState.normal)
+        
+    
+        btn1.addTarget(self, action: #selector(self.gotoBack), for: .touchUpInside)
+        
+        self.view.addSubview(btn1)
 
         // チャート
-        barChartView = BarChartView(frame:CGRect(x:0,y:statusBarHeight,width:self.view.bounds.width,height:ch))
+        barChartView = BarChartView(frame:CGRect(x:0,y:statusBarHeight + 25,width:self.view.bounds.width,height:ch))
         barChartView.leftAxis.axisMinimum = 0.0
         barChartView.leftAxis.axisMaximum = unitsCal.max()! * 1.25
 
@@ -63,23 +88,60 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
         //
         barChartView.drawBarShadowEnabled = false
         barChartView.drawBordersEnabled = true
-        
+            
         setChart(values: unitsCal)
         self.view.addSubview(barChartView)
         
-        
-        let mt:CGFloat = statusBarHeight + ch
-        tableView = UITableView(frame:CGRect(x:0,y:mt,width:self.view.bounds.width,height:self.view.bounds.height - mt))
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        self.view.addSubview(tableView)
+        self.getJson()
         
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    internal func gotoBack(sender: UIButton){
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func getJson() -> JSON{
+        var json:JSON = JSON("")
+        let URL = "https://74sgw22ebg.execute-api.ap-northeast-1.amazonaws.com/dev/calorie"
+        Alamofire.request(URL, parameters: ["date":"2017-06-17"])
+            .responseJSON { response in
+                json = JSON(response.result.value)
+                
+                
+                json["body"].forEach{(_, data) in
+                    
+                    let food: [String: String] = [
+                        "menu": data["menu_name"].stringValue,
+                        "cal": data["calorie"].description,
+                        "img": data["url"].stringValue,
+                        "date": data["ate_at"].stringValue
+                    ]
+                    self.rireki.append(food)
+                    
+                    self.afterJson()
+                    
+                }
+
+                
+        }
+        
+        return json
+    }
+    
+    
+    func afterJson(){
+        let mt:CGFloat = statusBarHeight + ch + 25
+        tableView = UITableView(frame:CGRect(x:0,y:mt,width:self.view.bounds.width,height:self.view.bounds.height - mt))
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.view.addSubview(tableView)
     }
 
     func setChart(values: [Double]){
@@ -130,8 +192,14 @@ class HistoryViewController: UIViewController, UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
         //cell.imageView = ""
-        cell.textLabel?.text = "\(foodcal[indexPath.row]) kcal"
-        cell.detailTextLabel?.text = "\(uptime[indexPath.row])"
+        let r = rireki[indexPath.row]
+        
+        cell.textLabel?.text = r["cal"]! + "kcal"
+        cell.detailTextLabel?.text = r["menu"]! + " " + r["date"]!
+        let url = NSURL(string: r["img"]!);
+        var imageData = NSData(contentsOf: url as! URL)
+        var img = UIImage(data:imageData as! Data);
+        cell.imageView?.image = img
         //cell.accessoryType = .detailButton
         
         return cell
