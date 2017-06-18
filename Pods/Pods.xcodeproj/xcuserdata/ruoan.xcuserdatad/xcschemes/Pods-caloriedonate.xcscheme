@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6BFCC58603097CDEE02EBF997D5E84A9"
+               BlueprintIdentifier = "E308E5038DA8ACBD5F2E637BE538C355"
                BuildableName = "Pods_caloriedonate.framework"
                BlueprintName = "Pods-caloriedonate"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6BFCC58603097CDEE02EBF997D5E84A9"
+            BlueprintIdentifier = "E308E5038DA8ACBD5F2E637BE538C355"
             BuildableName = "Pods_caloriedonate.framework"
             BlueprintName = "Pods-caloriedonate"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6BFCC58603097CDEE02EBF997D5E84A9"
-            BuildableName = "Pods_caloriedonate.framework"
-            BlueprintName = "Pods-caloriedonate"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

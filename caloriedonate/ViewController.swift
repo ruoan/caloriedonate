@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 class ViewController: UIViewController , UITableViewDataSource, UITableViewDelegate {
     
@@ -20,40 +22,43 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     var btn1: UIButton!
     var btn2: UIButton!
     
-    let menu = ["唐揚げ","パン","牛タン定食","牛タン定食","牛タン定食"]
-    let foodcal = [850.0,150.0,740.0,740.0,740.0]
+    var today: [[String: String?]] = []
     
     let iconcamera :UIImage? = UIImage(named:"photo-camera.png")
     let iconoption :UIImage? = UIImage(named:"listing-option.png")
+    
+    var baseCal:Int? = 1800
+    var nowCal:Int? = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //データ取得
+        self.getJson()
         
         //画面中央
         let posX: CGFloat = self.view.bounds.width/2
         let posY: CGFloat = self.view.bounds.height/2
         
-        var baseCal:Int = 1800
-        var nowCal:Int = 1600
-        
-        
-        //パイチャートカラー定義
-        let underColor:UIColor = UIColor.rgb(r: 0, g: 179, b: 198, alpha: 1.0);
-        let overColor:UIColor = UIColor.rgb(r: 206, g: 8, b: 77, alpha: 1.0);
+        //カラー定義
         let bgColor:UIColor = UIColor.rgb(r: 245, g: 245, b: 245, alpha: 1.0);
         
-        let leftColor:UIColor = UIColor.rgb(r: 8, g: 206, b: 199, alpha: 1.0);
         
         //背景色
         self.view.backgroundColor = bgColor
         
-        //パイチャート描画
-        pieView = PieView(frame: CGRect(x: 45, y: 90, width: 230, height: 230), cal: nowCal, max: baseCal)
-        self.view.addSubview(pieView)
         
+    }
+    
+    func afterGetjson(){
+        
+        let underColor:UIColor = UIColor.rgb(r: 0, g: 179, b: 198, alpha: 1.0);
+        let overColor:UIColor = UIColor.rgb(r: 206, g: 8, b: 77, alpha: 1.0);
+        let leftColor:UIColor = UIColor.rgb(r: 8, g: 206, b: 199, alpha: 1.0);
+        let bgColor:UIColor = UIColor.rgb(r: 245, g: 245, b: 245, alpha: 1.0);
         
         var nowcolor:UIColor
-        if(nowCal > baseCal){
+        if(self.nowCal! > self.baseCal!){
             nowcolor = overColor
         } else {
             nowcolor = underColor
@@ -70,16 +75,16 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         
         //左上文字列
         var leftstr:String
-        if(baseCal > nowCal){
+        if(baseCal! > nowCal!){
             leftstr = "Clear"
         } else {
-            leftstr = String(nowCal - baseCal) + "円"
+            leftstr = String(nowCal! - baseCal!) + "円"
         }
         
         let labelleft: UILabel = UILabel(frame: CGRect(x: 30,
-                                                      y: 80,
-                                                      width: 120,
-                                                      height: 30))
+                                                       y: 80,
+                                                       width: 120,
+                                                       height: 30))
         labelleft.textColor = leftColor
         //labelleft.backgroundColor = UIColor.red;
         labelleft.font = UIFont(name: "HiraKakuProN-W6",size: 24)
@@ -87,12 +92,21 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         labelleft.text = leftstr
         self.view.addSubview(labelleft)
         
+        //テーブルビュー
+        var tableoffset:CGFloat = 330
+        tableView = UITableView(frame:CGRect(x:0,y:tableoffset,width:self.view.bounds.width,height:self.view.bounds.height - tableoffset))
+        tableView.backgroundColor = bgColor
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        self.view.addSubview(tableView)
+        
         //右上ボタン
         btn1 = UIButton()
         btn1.frame = CGRect(x: self.view.bounds.width - 80,
-                                  y: 80,
-                                  width: 60,
-                                  height: 60)
+                            y: 80,
+                            width: 60,
+                            height: 60)
         btn1.setImage(iconoption, for: UIControlState.normal)
         
         let btn1Color:UIColor = UIColor.rgb(r: 255, g: 255, b: 255, alpha: 1.0)
@@ -122,20 +136,45 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         btn2.layer.shadowRadius = 3.0
         btn2.layer.cornerRadius = 30.0
         
-        
-        
-        //テーブルビュー
-        var tableoffset:CGFloat = 330
-        tableView = UITableView(frame:CGRect(x:0,y:tableoffset,width:self.view.bounds.width,height:self.view.bounds.height - tableoffset))
-        tableView.backgroundColor = bgColor
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        self.view.addSubview(tableView)
-        
         self.view.addSubview(btn2)
+    }
+    
+    func getJson() -> JSON{
+        var json:JSON = JSON("")
+        let URL = "https://74sgw22ebg.execute-api.ap-northeast-1.amazonaws.com/dev/calorie"
+        Alamofire.request(URL, parameters: ["date":"2017-06-17"])
+            .responseJSON { response in
+                json = JSON(response.result.value)
+                
+                //print(json["body"])
+                
+                json["body"].forEach{(_, data) in
+                    self.nowCal = self.nowCal! + data["calorie"].intValue
+                    
+                    let food: [String: String?] = [
+                        "menu": data["menu_name"].string,
+                        "cal": data["calorie"].description,
+                        "img": data["url"].string
+                    ]
+                    self.today.append(food)
+                    
+                }
+                
+                print(self.nowCal)
+                
+                //パイチャート描画
+                self.pieView = PieView(frame: CGRect(x: 45, y: 90, width: 230, height: 230), cal: self.nowCal!, max: self.baseCal!)
+                self.view.addSubview(self.pieView)
+                
+                self.afterGetjson()
+                
+                //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.pieView.startAnimating()
+                //}
+                
+        }
         
-        
+        return json
     }
     
     // セルを作る
@@ -144,15 +183,20 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
         let bgColor:UIColor = UIColor.rgb(r: 245, g: 245, b: 245, alpha: 1.0);
         //cell.imageView = ""
         cell.backgroundColor = bgColor
-        cell.textLabel?.text = "\(foodcal[indexPath.row]) kcal"
-        cell.detailTextLabel?.text = "\(menu[indexPath.row])"
+        let t = today[indexPath.row]
+        cell.textLabel?.text = t["cal"]!! + "kcal"
+        cell.detailTextLabel?.text = t["menu"]!
         //cell.accessoryType = .detailButton
         
         return cell
     }
     // セルの数を設定
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menu.count
+        if(today != nil){
+            return today.count
+        }else {
+            return 0
+        }
     }
     // セルがタップされた時の処理
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -170,9 +214,6 @@ class ViewController: UIViewController , UITableViewDataSource, UITableViewDeleg
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.pieView.startAnimating()
-        }
         
     }
 

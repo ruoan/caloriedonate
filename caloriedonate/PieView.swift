@@ -29,7 +29,6 @@ class PieView: UIView {
         
         
         _end_angle = _end_angle +  angle
-        print(_end_angle)
         if(_end_angle > max) {
             //終了
             link.invalidate()
